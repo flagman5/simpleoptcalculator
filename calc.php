@@ -24,7 +24,7 @@ function long_stock($purchase, $pnl, $quantity) {
 	
 	//now do actual pnl calculation
 	foreach($pnl as $k=>$v) {
-		$pnl[$k] = ($v - $purchase)*$quantity);
+		$pnl[$k] = ($v - $purchase)*$quantity;
 	}
 	
 	return $pnl;
