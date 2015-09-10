@@ -6,13 +6,13 @@ if($_POST['submit']) {
 	
 	//first the long stock
 	if(isset($_POST['stock_purchase'])) {
-		$new_pnl = long_stock($_POST['stock_purchase'], $pnl);
+		$new_pnl = long_stock($_POST['stock_purchase'], $pnl, $_POST['stock_purchase_size']);
 	}
 	
 
 }	
 
-function long_stock($purchase, $pnl) {
+function long_stock($purchase, $pnl, $quantity) {
 	
 	//first establish the price range, +/- 20%
 	$min = $purchase*0.8;
@@ -24,7 +24,7 @@ function long_stock($purchase, $pnl) {
 	
 	//now do actual pnl calculation
 	foreach($pnl as $k=>$v) {
-		$pnl[$k] = $v - $purchase;
+		$pnl[$k] = ($v - $purchase)*$quantity);
 	}
 	
 	return $pnl;
@@ -42,7 +42,7 @@ function long_stock($purchase, $pnl) {
 	</head>
 	<body style="padding:20px;">
 		 <form action="" method="post">
-				<p>Long stock price: <input type="text" name="stock_purchase" size="5"></p>
+				<p>Long stock price: <input type="text" name="stock_purchase" size="5">Long stock quanity: <input type="text" name="stock_purchase_size" value="100" size="5"></p>
 				<p>
 				Leg 1: <select name="leg1_buy_sell">
 								<option value="buy">Buy</option>
